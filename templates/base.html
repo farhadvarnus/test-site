@@ -64,12 +64,12 @@
                     <ul class="nav-menu">
                         <li><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
-                        <li class="menu-has-children"><a href="">Blog</a>
-                            <ul>
-                                <li><a href="{% url 'index_blog'%}">Blog Home</a></li>
-                                <li><a href="{% url 'single_blog'%}">Blog Single</a></li>
-                            </ul>
-                        </li>
+
+
+                        <li><a href="{% url 'index_blog'%}">Blog </a></li>
+
+
+
                         <li class="menu-has-children"><a href="">Pages</a>
                             <ul>
                                 <li><a href="{% url 'elements' %}">Elements</a></li>
@@ -86,7 +86,8 @@
                 </nav><!-- #nav-menu-container -->
             </div>
         </div>
-    </header><!-- #header -->
+    </header>
+    <!-- #header -->
     {% block content %}
 
 
