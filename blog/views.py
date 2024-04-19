@@ -17,5 +17,28 @@ def single_blog(request, pid):
     post = get_object_or_404(posts, pk=pid)
     post.counted_view += 1
     post.save()
-    context = {"post": post}
+
+    nex = False
+    next = 404
+    prev_post = 404
+    next_post = 404
+
+    for i, po in enumerate(posts):
+        if nex:
+            next = po.id
+            break
+        if po.id == post.id:
+            if i == 0:
+                prev = 404
+            if i != 0:
+                prev = temp
+            nex = True
+
+        temp = po.id
+    if next != 404:
+        next_post = get_object_or_404(posts, pk=next)
+    if prev != 404:
+        prev_post = get_object_or_404(posts, pk=prev)
+    context = {"post": post, 'posts': posts,
+               "next": next_post, "prev": prev_post}
     return render(request, "blog/blog-single.html", context)
