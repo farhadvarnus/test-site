@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
 {% block content %}
 <!-- start banner Area -->
 <section class="relative about-banner">
@@ -12,7 +13,7 @@
 				</h1>
 				<p class="text-white link-nav"><a href="{% url 'index' %}">Home </a> <span
 						class="lnr lnr-arrow-right"></span><a href="{% url 'index_blog' %}">Blog </a> <span
-						class="lnr lnr-arrow-right"></span> <a href="{% url 'single_blog' pid=post.id %}">
+						class="lnr lnr-arrow-right"></span> <a>
 						{{post.title}}</a></p>
 			</div>
 		</div>
@@ -39,24 +40,27 @@
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{post.author.get_full_name}}</a>
 								<span class="lnr lnr-user"></span>
 							</p>
-							<p class="date col-lg-12 col-md-12 col-6"><a href="#">12 Dec, 2017</a> <span
-									class="lnr lnr-calendar-full"></span></p>
+							<p class="date col-lg-12 col-md-12 col-6">
+								<a href="#">{{post.published_date|date:"D d/M/Y"}}</a>
+								<span class="lnr lnr-calendar-full"></span>
+							</p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_view}}</a> <span
 									class="lnr lnr-eye"></span></p>
 							<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span
 									class="lnr lnr-bubble"></span></p>
-							<ul class="social-links col-lg-12 col-md-12 col-6">
+
+							<!--<ul class="social-links col-lg-12 col-md-12 col-6">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-github"></i></a></li>
 								<li><a href="#"><i class="fa fa-behance"></i></a></li>
-							</ul>
+							</ul>-->
 						</div>
 					</div>
 					<div class="col-lg-9 col-md-9">
 						<h3 class="mt-20 mb-20">{{post.title}}</h3>
 						<p class="excert">
-							{{post.content}}
+							{{post.content|truncatewords:20}}
 						</p>
 
 					</div>
@@ -69,7 +73,7 @@
 							{% if prev != 404 %}
 							<div class="thumb">
 								<a href="{% url 'single_blog' pid=prev.id %}"><img class="img-fluid"
-										src="{% static 'img/blog/prev.jpg' %}" alt=""></a>
+										src="{{prev.image.url}}" alt=""></a>
 							</div>
 							<div class="arrow">
 								<a href="{% url 'single_blog' pid=prev.id %}"><span
@@ -77,8 +81,8 @@
 							</div>
 							<div class="detials">
 
-								<p>{{prev.content}}</p>
-								<a href="#">
+								<p>previous post</p>
+								<a href="{% url 'single_blog' pid=prev.id %}">
 
 									<h4>{{prev.title}}</h4>
 
@@ -90,7 +94,7 @@
 							class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
 							<div class="detials">
 								{% if next != 404 %}
-								<p>{{next.content}}</p>
+								<p>next page</p>
 
 								<a href="{% url 'single_blog' pid=next.id %}">
 
@@ -105,7 +109,7 @@
 							</div>
 							<div class="thumb">
 								<a href="{% url 'single_blog' pid=next.id %}"><img class="img-fluid"
-										src="{% static 'img/blog/next.jpg' %}" alt=""></a>
+										src="{{next.image.url}}" alt=""></a>
 							</div>
 							{% endif %}
 						</div>
@@ -244,78 +248,8 @@
 							<button type="submit"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
-					<div class="single-sidebar-widget user-info-widget">
-						<img src="{% static 'img/blog/user-info.png' %}" alt="">
-						<a href="#">
-							<h4>Charlie Barber</h4>
-						</a>
-						<p>
-							Senior blog writer
-						</p>
-						<ul class="social-links">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-github"></i></a></li>
-							<li><a href="#"><i class="fa fa-behance"></i></a></li>
-						</ul>
-						<p>
-							Boot camps have its supporters andit sdetractors. Some people do not understand why you
-							should have to spend money on boot camp when you can get. Boot camps have itssuppor ters
-							andits detractors.
-						</p>
-					</div>
-					<div class="single-sidebar-widget popular-post-widget">
-						<h4 class="popular-title">Popular Posts</h4>
-						<div class="popular-post-list">
-							<div class="single-post-list d-flex flex-row align-items-center">
-								<div class="thumb">
-									<img class="img-fluid" src="{% static 'img/blog/pp1.jpg' %}" alt="">
-								</div>
-								<div class="details">
-									<a href="blog-single.html">
-										<h6>Space The Final Frontier</h6>
-									</a>
-									<p>02 Hours ago</p>
-								</div>
-							</div>
-							<div class="single-post-list d-flex flex-row align-items-center">
-								<div class="thumb">
-									<img class="img-fluid" src="{% static 'img/blog/pp2.jpg' %}" alt="">
-								</div>
-								<div class="details">
-									<a href="blog-single.html">
-										<h6>The Amazing Hubble</h6>
-									</a>
-									<p>02 Hours ago</p>
-								</div>
-							</div>
-							<div class="single-post-list d-flex flex-row align-items-center">
-								<div class="thumb">
-									<img class="img-fluid" src="{% static 'img/blog/pp3.jpg' %}" alt="">
-								</div>
-								<div class="details">
-									<a href="blog-single.html">
-										<h6>Astronomy Or Astrology</h6>
-									</a>
-									<p>02 Hours ago</p>
-								</div>
-							</div>
-							<div class="single-post-list d-flex flex-row align-items-center">
-								<div class="thumb">
-									<img class="img-fluid" src="{% static 'img/blog/pp4.jpg' %}" alt="">
-								</div>
-								<div class="details">
-									<a href="blog-single.html">
-										<h6>Asteroids telescope</h6>
-									</a>
-									<p>02 Hours ago</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="single-sidebar-widget ads-widget">
-						<a href="#"><img class="img-fluid" src="{% static 'img/blog/ads-banner.jpg' %}" alt=""></a>
-					</div>
+
+
 					<div class="single-sidebar-widget post-category-widget">
 						<h4 class="category-title">Post Catgories</h4>
 						<ul class="cat-list">
@@ -363,6 +297,10 @@
 							</li>
 						</ul>
 					</div>
+					{% include 'blog/blog-writer.html' %}
+					{% lastest_posts %}
+					{% include 'blog/blog-ads.html' %}
+					{% postcategories %}
 					<div class="single-sidebar-widget newsletter-widget">
 						<h4 class="newsletter-title">Newsletter</h4>
 						<p>
