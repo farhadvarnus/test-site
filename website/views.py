@@ -5,6 +5,7 @@ from django.utils import timezone
 
 
 def index_view(request):
+
     return render(request, "website/index.html")
 
 
