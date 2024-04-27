@@ -23,11 +23,9 @@ def contact_view(request):
             form.instance.name = "unknown"
             form.save()
             messages.add_message(request, messages.SUCCESS, 'SUCCESS!!!')
-            return HttpResponseRedirect("/")
 
         else:
             messages.add_message(request, messages.ERROR, 'FAILD!!!')
-            return HttpResponseRedirect("/")
 
     form = ContactForm()
     return render(request, "website/contact.html", {"form": form})

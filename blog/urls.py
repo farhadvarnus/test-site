@@ -6,4 +6,5 @@ urlpatterns = [
     path("category/<str:cat_name>", index_blog, name='category_blog'),
     path("author/<str:author_username>", index_blog, name='author_blog'),
     path("search/", search_blog, name='search_blog'),
+    path("tags/<str:tag_name>", index_blog, name='tag_blog'),
 ]

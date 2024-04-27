@@ -2,6 +2,7 @@
 {% load static %}
 {% load blog_tags %}
 {% block content %}
+{% load humanize %}
 <!-- start banner Area -->
 <section class="banner-area relative blog-home-banner" id="home">
 	<div class="overlay overlay-bg"></div>
@@ -189,15 +190,7 @@
 							You can unsubscribe at any time
 						</p>
 					</div>
-					<div class="single-sidebar-widget tag-cloud-widget">
-						<h4 class="tagcloud-title">Tag Clouds</h4>
-						<ul>
-							{% for cat in posts.category.all %}
-							<li><a href="{% url 'category_blog' cat_name=cat.name %}">{{cat.name}}</a></li>
-							{% endfor %}
-
-						</ul>
-					</div>
+					{% include 'blog/blog-tag.html' %}
 				</div>
 			</div>
 		</div>

@@ -31,15 +31,34 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'robots',
+    'taggit',
+    'django_summernote',
+    'captcha',
+
+
     "website",
     "blog",
 ]
+# SITE FRAMEWORK
+SITE_ID = 2
+# SUMMERNOTE
+Z_FRAME_OPTIONS = 'SAMEORIGIN'
+# MULTI CAPTCHA ADMIN
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
