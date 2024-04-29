@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.utils import timezone
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 
